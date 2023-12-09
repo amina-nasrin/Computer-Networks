@@ -97,9 +97,23 @@ out:
 
 int dataFromCli(int client_socket, char *cli_buffer){
     int n_read = 0;
+    int q_client[5], top = 0;
     bzero(cli_buffer, strlen(cli_buffer));
+    for(int j=0;j<5;j++)
+        q_client[j]=0;
     
     if((n_read = read(client_socket, cli_buffer, 256))>0){
+        /*if(buffer[strlen(buffer)] != 0){
+                printf("Reject Reply: Try Again!");
+                write(client_socket, "Reject Reply: Try Again!", 24);
+                q_client[top] = client_socket;
+                top++;
+                return 0;
+            }
+            if( ((top>0) || (top ==0)) && (q_client[top-1] != 0)){
+                client_socket = q_client[top];
+                top--;
+            }*/
             ProcessData(client_socket, cli_buffer);
     } else if(n_read == 0) {
            printf("Client %d Disconnected\n", client_socket);
@@ -110,7 +124,7 @@ int dataFromCli(int client_socket, char *cli_buffer){
 }
 
 int main(int argc, char *argv[]){
-    int sockfd = 0, maxfd= 0, portno, sockfd_fd = 0, activity, port, q_client[5], top=0;
+    int sockfd = 0, maxfd= 0, portno, sockfd_fd = 0, activity, port;
     char in_buffer[256], out_buffer[256], ip[INET_ADDRSTRLEN] = {0}, buffer[256] = {0};
     fd_set readfds;
     fd_set writefds;
@@ -118,9 +132,7 @@ int main(int argc, char *argv[]){
     portno = atoi(argv[1]);
 
     memset(&server, 0, sizeof(struct server_data));
-    for(int j=0;j<5;j++)
-        q_client[j]=0;
-
+    
     struct sockaddr_in server_addr, client_addr;
     if((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
         perror("Socket Failed");
@@ -176,16 +188,6 @@ int main(int argc, char *argv[]){
             port = ntohs(client_addr.sin_port);
             inet_ntop(AF_INET, &(client_addr.sin_addr), ip, INET_ADDRSTRLEN);
             printf("New Client: port = %d ip = %s\n", port, ip);
-   
-            if(in_buffer[strlen(in_buffer)] != 0){
-                printf("No space in Memory. Storing Req in Queue.");
-                q_client[top] = sockfd_fd;
-                top++;
-            }
-            if(q_client[top] != 0){
-                sockfd = q_client[top];
-                top--;
-            }
 
             strncpy(server.client_list[server.total_client].client_name, buffer, strlen(buffer));
             server.client_list[server.total_client].port = port;
