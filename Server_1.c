@@ -103,7 +103,7 @@ int dataFromCli(int client_socket, char *cli_buffer){
         q_client[j]=0;
     
     if((n_read = read(client_socket, cli_buffer, 256))>0){
-        /*if(buffer[strlen(buffer)] != 0){
+        if(buffer[strlen(buffer)] != 0){
                 printf("Reject Reply: Try Again!");
                 write(client_socket, "Reject Reply: Try Again!", 24);
                 q_client[top] = client_socket;
@@ -113,7 +113,7 @@ int dataFromCli(int client_socket, char *cli_buffer){
             if( ((top>0) || (top ==0)) && (q_client[top-1] != 0)){
                 client_socket = q_client[top];
                 top--;
-            }*/
+            }
             ProcessData(client_socket, cli_buffer);
     } else if(n_read == 0) {
            printf("Client %d Disconnected\n", client_socket);
