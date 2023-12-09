@@ -64,6 +64,8 @@ int main(int argc, char *argv[]){
         if(FD_ISSET(sockfd, &readfds)){
             if((n_read = read(sockfd, in_buffer, 256))>0){
                 printf("%s\n",in_buffer);
+                //if(strcmp((n_read, "Reject Reply... Try Again!") ==0 )
+                  //  n_write = write(sockfd, out_buffer, strlen(out_buffer));
             } else if(n_read == 0){
                 printf("Client Disconnected\n");
                 close(sockfd);
