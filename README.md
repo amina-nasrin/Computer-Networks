@@ -1,3 +1,6 @@
+This is a simple client-server chat application with basic client management, message parsing, and handling of specific client requests. The client-server communication relies on TCP sockets, where the server can handle multiple clients concurrently through the use of `select()`.
+
+
 ### **Client (Client.c and Client\_1.c)**
 
 The client application communicates with a server over a TCP/IP socket, sending and receiving messages. It has the following components:
@@ -73,9 +76,7 @@ The server waits for incoming client connections and processes messages. It cons
 
 * The server uses `select()` for multiplexing, waiting for events from multiple file descriptors (including incoming data from clients and standard input for server commands). It handles events asynchronously, ensuring that the server remains responsive while managing multiple client connections.
 
-### **Summary:**
 
-This is a simple client-server chat application with basic client management, message parsing, and handling of specific client requests. The client-server communication relies on TCP sockets, where the server can handle multiple clients concurrently through the use of `select()`.
 
 
 # Socket Programming Project
