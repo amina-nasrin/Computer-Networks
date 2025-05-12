@@ -1,7 +1,3 @@
-Of course! Based on the files you shared (`Client.c`, `Client_1.c`, `Server.c`, `Server_1.c`), here’s a **README.md** you can put in your Git repository:
-
----
-
 # Socket Programming Project
 
 This project contains basic and advanced client-server communication programs in C using TCP sockets.
