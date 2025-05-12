@@ -113,10 +113,6 @@ In the client, you can:
   * Basic error handling for incomplete messages.
 
 
-
-This is a simple client-server chat application with basic client management, message parsing, and handling of specific client requests. The client-server communication relies on TCP sockets, where the server can handle multiple clients concurrently through the use of `select()`.
-
-
 ### **Client (Client.c and Client\_1.c)**
 
 The client application communicates with a server over a TCP/IP socket, sending and receiving messages. It has the following components:
