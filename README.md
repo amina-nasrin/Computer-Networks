@@ -1,5 +1,3 @@
-Here is a brief technical description based on the provided code snippets for the client-server application.
-
 ### **Client (Client.c and Client\_1.c)**
 
 The client application communicates with a server over a TCP/IP socket, sending and receiving messages. It has the following components:
